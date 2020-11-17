@@ -12,22 +12,26 @@
 
 using namespace std;
 
-void anagramSTR(/*entered word*/,/* word list*/)
+int anagramSTR(/*entered word*/,/* word list*/)
 {
   int i;
   for(i=0;i<len(l);i++)
     if(strcmp(w,l[i])=0)
       //send back word
+      return 1; //in main add word to found words list
     else
       //not in list
+      return 0;//in main notify not in list
 }
 
-void anagramSTR(/*hashed word*/,/* hash list*/)
+int anagramHASH(/*hashed word*/,/* hash list*/)
 {
   int i;
   for(i=0;i<len(l);i++)
     if(hw=h[i])
       //send back word
+      return 1; //in main add word to found words list
     else
       //not in list
+      return 0;//in main notify not in list
 }
