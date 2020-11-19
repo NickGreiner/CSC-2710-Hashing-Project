@@ -59,9 +59,7 @@ int anagramStr(string entWord,string wordList[])
       return 0;//in main notify not in list
 }
 
-int anagramHash(string entW
-
-ordHash, string hashList[])
+int anagramHash(string entWordHash, string hashList[])
 {
   int i;
   for(i=0;i<len(l);i++)
