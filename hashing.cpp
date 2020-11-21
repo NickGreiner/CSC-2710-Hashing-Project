@@ -19,9 +19,7 @@ https://github.com/NickGreiner/CSC-2710-Hasing-Project
 using namespace std;
 
 vector<string> loadWordfile(string wordfile);
-vector<vector<string>> loadHashfile(string hashfile);
-
-vector<vector<string>> hashalg(vector<string> &wordVector);
+vector<vector<string>> hashalg(vector<string> wordVector);
 
 //int anagramStr(string entWord,string wordList[]);
 //int anagramHash(string entWordHash, string hashList[]);
@@ -50,10 +48,10 @@ int main(int argc, char **argv) {
     hashVector = hashalg(wordVector);
   }
 
-  else if (argc == 3) {
-    //load provided wordfile and hashfile
-    wordVector = loadWordfile(argv[1]);
-    hashVector = loadHashfile(argv[2]);
+  else {
+    cout << "Error: Unknown Args" << endl;
+    cout << "Format: hash.exe wordfile.txt" << endl;
+    return 1;
   }
 
   cout << "Available Letters: ";
@@ -85,7 +83,7 @@ vector<vector<string>> loadHashfile(string hashfile) {
   return hashVector;
 }
 
-vector<vector<string>> hashalg(vector<string> &wordVector) {
+vector<vector<string>> hashalg(vector<string> wordVector) {
   vector<vector<string>> hashVector;
 
   return hashVector;
