@@ -37,8 +37,9 @@ int main(int argc, char **argv) {
   if (argc == 1) {
     string inWordFile;
     // ask user for wordfile, then load it, then hash i
-    cout<<"Please enter file name of word list";
-    cin>>inWordFile;
+    cout << "Please enter file name of word list: ";
+    cin >> inWordFile;
+    cout << endl;
     wordVector = loadWordfile(inWordFile);
     hashVector = hashalg(wordVector);
   }
@@ -55,12 +56,18 @@ int main(int argc, char **argv) {
     hashVector = loadHashfile(argv[2]);
   }
 
-  printVector(wordVector);
-
-  cout << "Available Letters:";
+  cout << "Available Letters: ";
   string letterString = wordVector[0];
+  string spacedString;
   random_shuffle(letterString.begin(), letterString.end());
-  cout << letterString << endl;
+
+  for (auto itr : letterString)
+   {
+      spacedString += itr;
+      spacedString += ' ';
+   }
+
+  cout << spacedString << endl;
 }
 
 vector<string> loadWordfile(string wordfile) {
@@ -112,4 +119,6 @@ void printVector(vector<string> outputVector) {
 
    for(int i=0; i < outputVector.size(); i++)
    cout << outputVector.at(i) << ", ";
+
+   cout << endl;
 }
