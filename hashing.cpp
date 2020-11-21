@@ -18,36 +18,73 @@ https://github.com/NickGreiner/CSC-2710-Hasing-Project
 
 using namespace std;
 
-vector<int> loadWordfile(string wordfile);
-vector<int> loadHashfile(string hashfile);
-int anagramStr(string entWord,string wordList[]);
-int anagramHash(string entWordHash, string hashList[]);
+vector<string> loadWordfile(string wordfile);
+vector<vector<string>> loadHashfile(string hashfile);
 
-void runTimeTest();
+vector<vector<string>> hashalg(vector<string> &wordVector);
+
+//int anagramStr(string entWord,string wordList[]);
+//int anagramHash(string entWordHash, string hashList[]);
+
+void printVector(vector<string> outputVector);
+
+// void runTimeTest();
 
 int main(int argc, char **argv) {
+  vector<string> wordVector;
+  vector<vector<string>> hashVector;
+
   if (argc == 1) {
+    string inWordFile;
     // ask user for wordfile, then load it, then hash i
     cout<<"Please enter file name of word list";
     cin>>inWordFile;
-    loadWordfile();
-    hashalg();
+    wordVector = loadWordfile(inWordFile);
+    hashVector = hashalg(wordVector);
   }
 
   else if (argc == 2) {
     //load provied wordfile, then hash it
-    loadWordfile(/*wordFile*/);
-    hashalg(/*vector holding words*/);
+    wordVector = loadWordfile(argv[1]);
+    hashVector = hashalg(wordVector);
   }
 
   else if (argc == 3) {
     //load provided wordfile and hashfile
-    loadWordfile(/*wordFile*/);
-    loadHashfile(/*hashFile*/);
+    wordVector = loadWordfile(argv[1]);
+    hashVector = loadHashfile(argv[2]);
   }
-  
-  cout<< "Available Letters:";
+
+  printVector(wordVector);
+
+  cout << "Available Letters:";
+  string letterString = wordVector[0];
+  random_shuffle(letterString.begin(), letterString.end());
+  cout << letterString << endl;
 }
+
+vector<string> loadWordfile(string wordfile) {
+  vector<string> wordVector;
+  ifstream wfile(wordfile);
+
+  copy(istream_iterator<string>(wfile), istream_iterator<string>(), back_inserter(wordVector));
+
+  return wordVector;
+}
+
+vector<vector<string>> loadHashfile(string hashfile) {
+  vector<vector<string>> hashVector;
+
+  return hashVector;
+}
+
+vector<vector<string>> hashalg(vector<string> &wordVector) {
+  vector<vector<string>> hashVector;
+
+  return hashVector;
+}
+
+/*
 //NEED TIME FUNCTION STILL
 int anagramStr(string entWord,string wordList[])
 {
@@ -67,4 +104,12 @@ int anagramHash(string entWordHash, string hashList[])
       return 1; //in main add word to found words list
     else
       return 0;//in main notify not in list
+}
+*/
+
+void printVector(vector<string> outputVector) {
+   cout << "The vector elements are : ";
+
+   for(int i=0; i < outputVector.size(); i++)
+   cout << outputVector.at(i) << ", ";
 }
