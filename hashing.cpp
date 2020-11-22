@@ -30,7 +30,7 @@ void playGame(vector<string> &wordVector, vector<vector<string>> &hashVector);
 
 void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<string>> &hashVector);
 
-int totalWordTime, totalHashTime;
+int totalWordTime, totalHashTime, score;
 
 int main(int argc, char **argv) {
   vector<string> wordVector;
@@ -57,6 +57,8 @@ int main(int argc, char **argv) {
     cout << "Format: hash.exe wordfile.txt" << endl;
     return 1;
   }
+
+  score = 0;
 
   playGame(wordVector, hashVector);
 
@@ -143,6 +145,8 @@ void playGame(vector<string> &wordVector, vector<vector<string>> &hashVector) {
 
   runTimeTest(testWord, wordVector, hashVector);
 
+  cout << "------------------------------------------------" << endl << endl;
+
   cout << "Play again? Y/N: ";
   cin >> playAgain;
   cout << endl << endl;
@@ -152,7 +156,13 @@ void playGame(vector<string> &wordVector, vector<vector<string>> &hashVector) {
   });
 
   if (playAgain == "Y") {
+    cout << "Current Score: " << score << "." << endl << endl;
+    cout << "------------------------------------------------" << endl << endl;
     playGame(wordVector, hashVector);
+  }
+
+  else {
+    cout << "Final score: " << score << "." << endl;
   }
 
 }
@@ -167,6 +177,8 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
   auto stop = high_resolution_clock::now();
 
   auto duration = duration_cast<microseconds>(stop - start);
+
+  cout << "------------------------------------------------" << endl << endl;
 
   if (found == 1) {
     cout << "Word found!" << endl << endl;
@@ -189,7 +201,10 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
 
   auto duration2 = duration_cast<microseconds>(stop2 - start2);
 
+  cout << "------------------------------------------------" << endl << endl;
+
   if (found == 1) {
+    score += 1;
     cout << "Word found!" << endl << endl;
   }
 
