@@ -30,6 +30,8 @@ void playGame(vector<string> &wordVector, vector<vector<string>> &hashVector);
 
 void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<string>> &hashVector);
 
+int totalWordTime, totalHashTime;
+
 int main(int argc, char **argv) {
   vector<string> wordVector;
   vector<vector<string>> hashVector;
@@ -174,7 +176,12 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
     cout << "Not found." << endl << endl;
   }
 
-  cout << "Time taken by wordVector: " << duration.count() << " microseconds" << endl << endl;
+  cout << "Time taken by wordVector this run: " << duration.count() << " microseconds." << endl << endl;
+
+  totalWordTime += duration.count();
+
+  cout << "Total time taken by wordVector: " << totalWordTime << " microseconds." << endl << endl;
+
 
   auto start2 = high_resolution_clock::now();
   found = anagramHash(testWord, hashVector);
@@ -190,5 +197,9 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
     cout << "Not found." << endl << endl;
   }
 
-  cout << "Time taken by hashVector: " << duration2.count() << " microseconds" << endl << endl;
+  cout << "Time taken by hashVector this run: " << duration2.count() << " microseconds." << endl << endl;
+
+  totalHashTime += duration2.count();
+
+  cout << "Total time taken by hashVector: " << totalHashTime << " microseconds." << endl << endl;
 }
