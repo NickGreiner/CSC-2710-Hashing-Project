@@ -109,7 +109,7 @@ int anagramHash(string entWord, vector<vector<string>> &hashVector) {
   for(int j = 0; j < len; j++)
      hash += int(entWord[j]);
 
-  for(int i = 0; i < hashVector.size(); i++)
+  for(int i = 0; i < hashVector[hash%10].size(); i++)
     if(entWord.compare(hashVector[hash%10][i]) == 0)
       return 1;
 
