@@ -15,6 +15,7 @@ https://github.com/NickGreiner/CSC-2710-Hasing-Project
 #include <string>
 #include <algorithm>
 #include <iterator>
+#include <unistd.h>
 
 using namespace std;
 
@@ -44,12 +45,16 @@ int main(int argc, char **argv) {
     cout << endl;
     wordVector = loadWordfile(inWordFile);
     hashVector = hashalg(wordVector);
+
+    cout << "Word list size: " << wordVector.size() << "." << endl;
   }
 
   else if (argc == 2) {
     //load provied wordfile, then hash it
     wordVector = loadWordfile(argv[1]);
     hashVector = hashalg(wordVector);
+
+    cout << "Word list size: " << wordVector.size() << "." << endl;
   }
 
   else {
@@ -174,6 +179,7 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
 
   auto start = high_resolution_clock::now();
   found = anagramStr(testWord, wordVector);
+  usleep(5000);
   auto stop = high_resolution_clock::now();
 
   auto duration = duration_cast<microseconds>(stop - start);
