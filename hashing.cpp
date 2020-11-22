@@ -21,7 +21,7 @@ using namespace std;
 vector<string> loadWordfile(string wordfile);
 vector<vector<string>> hashalg(vector<string> &wordVector);
 
-int anagramStr(string entWord,string wordList[]);
+int anagramStr(string entWord, vector<string> &wordVector);
 //int anagramHash(string entWordHash, string hashList[]);
 
 void printVector(vector<string> outputVector);
@@ -92,25 +92,28 @@ vector<vector<string>> hashalg(vector<string> &wordVector) {
   return buckets;
 }
 
-//NEED TIME FUNCTION STILL
 int anagramStr(string entWord, vector<string> &wordVector) {
-  int i;
-  for(i=0;i < wordVector.size(); i++)
-    if(entWord.compare(wordVector[i]))
-      return 1; //in main add word to found words list
+  for(int i = 0; i < wordVector.size(); i++)
+    if(entWord.compare(wordVector[i]) == 0)
+      return 1;
 
-  return 0;//in main notify not in list
+  return 0;
 }
-/*
-int anagramHash(string entWordHash, vector<vector<string>> &hashVector) {
-  int i;
-  for(i=0;i < hashVector.size(); i++)
-    if(entWordHash=hashVector[i])
-      return 1; //in main add word to found words list
 
-  return 0;//in main notify not in list
+int anagramHash(string entWord, vector<vector<string>> &hashVector) {
+  int hash = 0;
+  int len = entWord.size();
+
+  for(int j = 0; j < len; j++)
+     hash += int(entWord[j]);
+
+  for(int i = 0; i < hashVector.size(); i++)
+    if(entWord.compare(hashVector[hash%10][i]) == 0)
+      return 1;
+
+  return 0;
 }
-*/
+
 void printVector(vector<string> outputVector) {
    cout << "The vector elements are : ";
 
@@ -140,7 +143,11 @@ void playGame(vector<string> &wordVector, vector<vector<string>> &hashVector) {
 
   cout << "Play again? Y/N: ";
   cin >> playAgain;
-  cout << endl;
+  cout << endl << endl;
+
+  for_each(playAgain.begin(), playAgain.end(), [](char & c) {
+    c = ::toupper(c);
+  });
 
   if (playAgain == "Y") {
     playGame(wordVector, hashVector);
@@ -160,15 +167,15 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
   auto duration = duration_cast<microseconds>(stop - start);
 
   if (found == 1) {
-    cout << "Word found!" << endl;
+    cout << "Word found!" << endl << endl;
   }
 
   else {
-    cout << "Not found." << endl;
+    cout << "Not found." << endl << endl;
   }
 
-  cout << "Time taken by wordVector: " << duration.count() << " microseconds" << endl;
-  /*
+  cout << "Time taken by wordVector: " << duration.count() << " microseconds" << endl << endl;
+
   auto start2 = high_resolution_clock::now();
   found = anagramHash(testWord, hashVector);
   auto stop2 = high_resolution_clock::now();
@@ -176,13 +183,12 @@ void runTimeTest(string testWord, vector<string> &wordVector, vector<vector<stri
   auto duration2 = duration_cast<microseconds>(stop2 - start2);
 
   if (found == 1) {
-    cout << "Word found!" << endl;
+    cout << "Word found!" << endl << endl;
   }
 
   else {
-    cout << "Not found." << endl;
+    cout << "Not found." << endl << endl;
   }
 
-  cout << "Time taken by hashVector: " << duration2.count() << " microseconds" << endl;
-  */
+  cout << "Time taken by hashVector: " << duration2.count() << " microseconds" << endl << endl;
 }
